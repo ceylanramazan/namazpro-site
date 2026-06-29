@@ -3,74 +3,158 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Destek - Namaz Pro</title>
+  <title>Support — Namaz Pro</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #0f1a14; color: #e8f0eb; }
-    header { background: #1B6B4A; padding: 60px 20px; text-align: center; }
-    header h1 { font-size: 2.4rem; font-weight: 700; color: #fff; }
-    header p { margin-top: 12px; font-size: 1.1rem; color: rgba(255,255,255,0.8); }
-    main { max-width: 700px; margin: 60px auto; padding: 0 20px; }
-    .card { background: #1a2e21; border-radius: 16px; padding: 32px; margin-bottom: 20px; }
-    .card h2 { font-size: 1.2rem; color: #4CAF82; margin-bottom: 12px; }
-    .card p, .card li { line-height: 1.8; color: #c8dace; }
-    .card ul { padding-left: 20px; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #0f1a14; color: #e8f0eb; line-height: 1.7; }
+    header { background: #1B6B4A; padding: 40px 20px 32px; text-align: center; }
+    header h1 { font-size: 1.9rem; color: #fff; font-weight: 700; }
+    header p { color: rgba(255,255,255,0.7); margin-top: 6px; font-size: 0.9rem; }
+    .lang-bar { background: #163d27; display: flex; justify-content: center; gap: 8px; padding: 14px 20px; border-bottom: 1px solid #1e4a30; }
+    .lang-btn { background: transparent; border: 1.5px solid #2e6645; color: #7ecba0; padding: 6px 20px; border-radius: 20px; cursor: pointer; font-size: 0.88rem; font-weight: 600; transition: all .2s; }
+    .lang-btn.active, .lang-btn:hover { background: #1B6B4A; border-color: #1B6B4A; color: #fff; }
+    main { max-width: 740px; margin: 40px auto; padding: 0 20px 60px; }
+    .card { background: #1a2e21; border-radius: 16px; padding: 28px 32px; margin-bottom: 20px; }
+    .card h2 { font-size: 1.05rem; color: #4CAF82; margin-bottom: 14px; font-weight: 600; }
+    .card p, .card li { color: #c8dace; font-size: 0.97rem; }
+    .card ul { padding-left: 20px; margin-top: 6px; }
     .card li { margin-bottom: 8px; }
+    .faq-q { font-weight: 600; color: #e8f0eb; margin-bottom: 4px; margin-top: 18px; }
+    .faq-q:first-child { margin-top: 0; }
+    .faq-a { color: #c8dace; }
     a { color: #4CAF82; }
-    .cta { display: inline-block; background: #1B6B4A; color: #fff; padding: 14px 28px; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 0.95rem; margin-top: 16px; }
+    .cta { display: inline-block; background: #1B6B4A; color: #fff; padding: 13px 28px; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 0.95rem; margin-top: 14px; }
     .cta:hover { background: #24895f; }
-    .back { display: block; text-align: center; margin-top: 40px; color: #4a7a5a; text-decoration: none; font-size: 0.9rem; }
-    footer { text-align: center; padding: 40px 20px; color: #4a7a5a; font-size: 0.85rem; }
-    .faq-q { font-weight: 600; color: #e8f0eb; margin-bottom: 4px; }
-    .faq-a { color: #c8dace; margin-bottom: 20px; }
+    .back { display: block; text-align: center; margin-top: 36px; color: #4a7a5a; text-decoration: none; font-size: 0.9rem; }
+    footer { text-align: center; padding: 32px 20px; color: #4a7a5a; font-size: 0.85rem; }
+    [lang-content] { display: none; }
+    [lang-content].active { display: block; }
+    [dir="rtl"] .card ul { padding-left: 0; padding-right: 20px; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Namaz Pro Destek</h1>
-    <p>Size yardimci olmaktan mutluluk duyariz</p>
-  </header>
-  <main>
+<header>
+  <h1>Namaz Pro</h1>
+  <p id="header-sub">Destek / Support / الدعم</p>
+</header>
 
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('tr')">Türkçe</button>
+  <button class="lang-btn" onclick="setLang('en')">English</button>
+  <button class="lang-btn" onclick="setLang('ar')">العربية</button>
+</div>
+
+<main>
+
+  <!-- TURKISH -->
+  <div lang-content="tr" class="active">
     <div class="card">
-      <h2>Iletisim</h2>
-      <p>Teknik destek, geri bildirim veya oneri icin bize e-posta gonderin:</p>
-      <br>
+      <h2>İletişim</h2>
+      <p>Teknik destek, geri bildirim veya öneri için bize e-posta gönderin:</p>
       <a href="mailto:developer.ramazanceylan@gmail.com" class="cta">developer.ramazanceylan@gmail.com</a>
     </div>
-
     <div class="card">
-      <h2>Sikca Sorulan Sorular</h2>
-
-      <p class="faq-q">Namaz vakitleri neden yanlis gosteriyor?</p>
-      <p class="faq-a">Uygulama GPS konumunuzu kullanir. Konum iznini ayarlardan kontrol edin ve dogru hesaplama metodunu (Diyanet, MWL, ISNA) sectiginizden emin olun.</p>
-
-      <p class="faq-q">Bildirimler gelmiyor, ne yapmaliyim?</p>
-      <p class="faq-a">iPhone Ayarlari > Namaz Pro > Bildirimler bolumunden bildirimlere izin verildigini kontrol edin. Ardinca uygulamadan vakitleri yeniden kaydedin.</p>
-
-      <p class="faq-q">Pro aboneliğimi nasil iptal ederim?</p>
-      <p class="faq-a">iPhone Ayarlari > Apple Kimliginiz > Abonelikler bolumunden Namaz Pro aboneliginizi yonetebilir veya iptal edebilirsiniz.</p>
-
-      <p class="faq-q">Pro satin aldim ama ozellikler acilmadi, ne yapmaliyim?</p>
-      <p class="faq-a">Uygulamada Ayarlar > Pro sekmesinden "Satin Alimlari Geri Yukle" butonuna basin. Sorun devam ederse e-posta ile bize ulasin.</p>
-
-      <p class="faq-q">Kuran sesi indirilmiyor veya kesilliyor?</p>
-      <p class="faq-a">Internet baglantinizi kontrol edin. Offline indirme icin Pro aboneligi gereklidir. Pro kullanicisiysiniz ve sorun yasiyorsaniz e-posta ile bize bildirin.</p>
-
-      <p class="faq-q">Kibla pusulasi dogru gosteriyor mu?</p>
-      <p class="faq-a">Pusulalarin konum hizmetleri ve rotasyon iznine ihtiyaci vardir. Kalibrasyon gerekiyorsa telefonunuzu 8 seklinde cevirmeniz hassasiyeti arttirir.</p>
+      <h2>Sıkça Sorulan Sorular</h2>
+      <p class="faq-q">Namaz vakitleri neden yanlış gösteriyor?</p>
+      <p class="faq-a">Uygulama GPS konumunuzu kullanır. Ayarlar'dan konum iznini ve doğru hesaplama metodunu (Diyanet, MWL, ISNA) kontrol edin.</p>
+      <p class="faq-q">Bildirimler gelmiyor, ne yapmalıyım?</p>
+      <p class="faq-a">iPhone Ayarları → Namaz Pro → Bildirimler bölümünden bildirimlere izin verildiğini kontrol edin. Ardından uygulamada vakitleri yeniden kaydedin.</p>
+      <p class="faq-q">Pro aboneliğimi nasıl iptal ederim?</p>
+      <p class="faq-a">iPhone Ayarları → Apple Kimliğiniz → Abonelikler bölümünden Namaz Pro aboneliğinizi yönetebilirsiniz.</p>
+      <p class="faq-q">Pro satın aldım ama özellikler açılmadı?</p>
+      <p class="faq-a">Ayarlar → Pro sekmesinden "Satın Alımları Geri Yükle" butonuna basın. Sorun devam ederse e-posta ile bize ulaşın.</p>
+      <p class="faq-q">Kıble pusulası doğru gösteriyor mu?</p>
+      <p class="faq-a">Telefonunuzu sekiz şeklinde çevirerek pusulayı kalibre edin. Doğru sonuç için "Gerçek Kuzey" (True Heading) kullanılır.</p>
     </div>
-
     <div class="card">
-      <h2>Diger Bilgiler</h2>
+      <h2>Diğer Bağlantılar</h2>
       <ul>
-        <li><a href="privacy.html">Gizlilik Politikasi</a></li>
-        <li><a href="terms.html">Kullanim Kosullari</a></li>
+        <li><a href="privacy.html">Gizlilik Politikası</a></li>
+        <li><a href="terms.html">Kullanım Koşulları</a></li>
       </ul>
     </div>
+    <a href="index.html" class="back">← Ana Sayfaya Dön</a>
+  </div>
 
-    <a href="index.html" class="back">← Ana Sayfaya Don</a>
-  </main>
-  <footer>© 2026 Namaz Pro. Tum haklari saklidir.</footer>
+  <!-- ENGLISH -->
+  <div lang-content="en">
+    <div class="card">
+      <h2>Contact Us</h2>
+      <p>For technical support, feedback or suggestions, send us an email:</p>
+      <a href="mailto:developer.ramazanceylan@gmail.com" class="cta">developer.ramazanceylan@gmail.com</a>
+    </div>
+    <div class="card">
+      <h2>Frequently Asked Questions</h2>
+      <p class="faq-q">Why are prayer times showing incorrectly?</p>
+      <p class="faq-a">The app uses your GPS location. Check location permissions in Settings and make sure you have selected the correct calculation method (Diyanet, MWL, or ISNA).</p>
+      <p class="faq-q">I'm not receiving notifications. What should I do?</p>
+      <p class="faq-a">Go to iPhone Settings → Namaz Pro → Notifications and make sure notifications are enabled. Then re-schedule prayer times from within the app.</p>
+      <p class="faq-q">How do I cancel my Pro subscription?</p>
+      <p class="faq-a">Go to iPhone Settings → Your Apple ID → Subscriptions to manage or cancel your Namaz Pro subscription.</p>
+      <p class="faq-q">I purchased Pro but features aren't unlocked?</p>
+      <p class="faq-a">Tap "Restore Purchases" in Settings → Pro tab. If the issue persists, please contact us by email.</p>
+      <p class="faq-q">Is the Qibla compass accurate?</p>
+      <p class="faq-a">Calibrate your compass by moving your phone in a figure-8 motion. The app uses True Heading for the most accurate direction.</p>
+    </div>
+    <div class="card">
+      <h2>Other Links</h2>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Use</a></li>
+      </ul>
+    </div>
+    <a href="index.html" class="back">← Back to Home</a>
+  </div>
+
+  <!-- ARABIC -->
+  <div lang-content="ar" dir="rtl" style="text-align:right">
+    <div class="card">
+      <h2>تواصل معنا</h2>
+      <p>للدعم الفني أو الملاحظات أو الاقتراحات، راسلنا على البريد الإلكتروني:</p>
+      <a href="mailto:developer.ramazanceylan@gmail.com" class="cta">developer.ramazanceylan@gmail.com</a>
+    </div>
+    <div class="card">
+      <h2>الأسئلة الشائعة</h2>
+      <p class="faq-q">لماذا تظهر أوقات الصلاة بشكل غير صحيح؟</p>
+      <p class="faq-a">يستخدم التطبيق موقع GPS الخاص بك. تحقق من إذن الموقع في الإعدادات وتأكد من اختيار طريقة الحساب الصحيحة (ديانت أو رابطة العالم الإسلامي أو ISNA).</p>
+      <p class="faq-q">لا أتلقى إشعارات، ماذا أفعل؟</p>
+      <p class="faq-a">اذهب إلى إعدادات iPhone ← نماز برو ← الإشعارات وتأكد من تفعيلها. ثم أعد جدولة أوقات الصلاة من داخل التطبيق.</p>
+      <p class="faq-q">كيف أُلغي اشتراك برو؟</p>
+      <p class="faq-a">اذهب إلى إعدادات iPhone ← معرف Apple ← الاشتراكات لإدارة اشتراك نماز برو أو إلغائه.</p>
+      <p class="faq-q">اشتريت برو لكن الميزات لم تُفعَّل؟</p>
+      <p class="faq-a">اضغط على "استعادة المشتريات" في الإعدادات ← تبويب برو. إذا استمرت المشكلة، تواصل معنا عبر البريد الإلكتروني.</p>
+      <p class="faq-q">هل بوصلة القبلة دقيقة؟</p>
+      <p class="faq-a">حرّك هاتفك على شكل رقم 8 لمعايرة البوصلة. يستخدم التطبيق الشمال الحقيقي للحصول على أدق اتجاه ممكن.</p>
+    </div>
+    <div class="card">
+      <h2>روابط أخرى</h2>
+      <ul>
+        <li><a href="privacy.html">سياسة الخصوصية</a></li>
+        <li><a href="terms.html">شروط الاستخدام</a></li>
+      </ul>
+    </div>
+    <a href="index.html" class="back">← العودة إلى الصفحة الرئيسية</a>
+  </div>
+
+</main>
+<footer>© 2026 Namaz Pro. All rights reserved.</footer>
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('[lang-content]').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelector('[lang-content="' + lang + '"]').classList.add('active');
+    event.target.classList.add('active');
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    localStorage.setItem('np_lang', lang);
+  }
+  const saved = localStorage.getItem('np_lang');
+  if (saved && saved !== 'tr') {
+    document.querySelectorAll('.lang-btn').forEach(b => {
+      if (b.textContent.includes(saved === 'en' ? 'English' : 'العربية')) b.click();
+    });
+  }
+</script>
 </body>
 </html>

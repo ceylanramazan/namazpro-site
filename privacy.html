@@ -3,69 +3,161 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gizlilik Politikası — Namaz Pro</title>
+  <title>Privacy Policy — Namaz Pro</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #0f1a14; color: #e8f0eb; line-height: 1.7; }
-    header { background: #1B6B4A; padding: 40px 20px; text-align: center; }
-    header h1 { font-size: 1.8rem; color: #fff; }
+    header { background: #1B6B4A; padding: 40px 20px 32px; text-align: center; }
+    header h1 { font-size: 1.9rem; color: #fff; font-weight: 700; }
     header p { color: rgba(255,255,255,0.7); margin-top: 6px; font-size: 0.9rem; }
+    .lang-bar { background: #163d27; display: flex; justify-content: center; gap: 8px; padding: 14px 20px; border-bottom: 1px solid #1e4a30; }
+    .lang-btn { background: transparent; border: 1.5px solid #2e6645; color: #7ecba0; padding: 6px 20px; border-radius: 20px; cursor: pointer; font-size: 0.88rem; font-weight: 600; transition: all .2s; }
+    .lang-btn.active, .lang-btn:hover { background: #1B6B4A; border-color: #1B6B4A; color: #fff; }
     main { max-width: 740px; margin: 40px auto; padding: 0 20px 60px; }
-    h2 { color: #4CAF82; font-size: 1.1rem; margin: 32px 0 10px; }
+    h2 { color: #4CAF82; font-size: 1.05rem; margin: 28px 0 10px; font-weight: 600; }
     p, li { color: #c8dace; font-size: 0.97rem; }
     ul { padding-left: 20px; margin-top: 8px; }
-    li { margin-bottom: 6px; }
+    li { margin-bottom: 8px; }
     a { color: #4CAF82; }
-    .back { display: inline-block; margin-top: 40px; color: #4CAF82; text-decoration: none; font-size: 0.9rem; }
-    .date { color: #4a7a5a; font-size: 0.85rem; margin-top: 8px; }
+    .back { display: block; text-align: center; margin-top: 40px; color: #4a7a5a; text-decoration: none; font-size: 0.9rem; }
+    footer { text-align: center; padding: 32px 20px; color: #4a7a5a; font-size: 0.85rem; }
+    [lang-content] { display: none; }
+    [lang-content].active { display: block; }
+    [dir="rtl"] ul { padding-left: 0; padding-right: 20px; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Gizlilik Politikası</h1>
-    <p class="date">Son güncelleme: 20 Haziran 2026</p>
-  </header>
-  <main>
-    <p>Bu gizlilik politikası, Namaz Pro uygulamasının ("uygulama") kişisel verilerinizi nasıl topladığını, kullandığını ve koruduğunu açıklar.</p>
+<header>
+  <h1>Namaz Pro</h1>
+  <p>Son güncelleme / Last updated / آخر تحديث: 29 Haziran 2026</p>
+</header>
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('tr')">Türkçe</button>
+  <button class="lang-btn" onclick="setLang('en')">English</button>
+  <button class="lang-btn" onclick="setLang('ar')">العربية</button>
+</div>
+<main>
 
+  <!-- TURKISH -->
+  <div lang-content="tr" class="active">
+    <h2 style="margin-top:0">Gizlilik Politikası</h2>
+    <p>Bu gizlilik politikası, Namaz Pro uygulamasının kişisel verilerinizi nasıl topladığını, kullandığını ve koruduğunu açıklar.</p>
     <h2>1. Toplanan Veriler</h2>
-    <p>Uygulama aşağıdaki verileri kullanır:</p>
     <ul>
       <li><strong>Konum verisi</strong> — Namaz vakitlerini ve kıble yönünü hesaplamak için yalnızca uygulama kullanımdayken erişilir. Sunucularımıza gönderilmez, cihazda işlenir.</li>
-      <li><strong>Kamera</strong> — Yalnızca AR Kıble özelliği için kullanılır. Kamera görüntüleri kaydedilmez veya paylaşılmaz.</li>
-      <li><strong>iCloud (Key-Value Storage)</strong> — Tercihlerinizi ve ayarlarınızı kendi Apple hesabınızın iCloud'unda senkronize etmek için kullanılır. Bu veriler yalnızca sizin erişiminize açıktır.</li>
-      <li><strong>Bildirimler</strong> — Namaz vakti hatırlatmaları için yerel bildirimler oluşturulur. Bildirim izniniz isteğe bağlıdır.</li>
+      <li><strong>Kamera</strong> — Yalnızca AR Kıble özelliği için kullanılır. Görüntüler kaydedilmez veya paylaşılmaz.</li>
+      <li><strong>iCloud</strong> — Tercihlerinizi kendi Apple hesabınızın iCloud'unda senkronize etmek için kullanılır. Bu veriler yalnızca sizin erişiminize açıktır.</li>
+      <li><strong>Bildirimler</strong> — Namaz vakti hatırlatmaları için yerel bildirimler oluşturulur. İzniniz isteğe bağlıdır.</li>
     </ul>
-
     <h2>2. Üçüncü Taraf Hizmetler</h2>
     <ul>
-      <li><strong>Aladhan API</strong> — Namaz vakitleri için koordinat bilgisi gönderilir. <a href="https://aladhan.com/privacy-policy" target="_blank">Aladhan Gizlilik Politikası</a></li>
-      <li><strong>quran.com API</strong> — Kuran metni ve ses için kullanılır. <a href="https://quran.com/privacy" target="_blank">quran.com Gizlilik Politikası</a></li>
-      <li><strong>RevenueCat</strong> — Pro abonelik satın alma işlemleri için kullanılır. Ödeme bilgileri doğrudan Apple App Store tarafından işlenir; RevenueCat yalnızca abonelik durumunu doğrular. <a href="https://www.revenuecat.com/privacy" target="_blank">RevenueCat Gizlilik Politikası</a></li>
+      <li><strong>Aladhan API</strong> — Namaz vakitleri için koordinat bilgisi gönderilir. <a href="https://aladhan.com/privacy-policy" target="_blank">Gizlilik Politikası</a></li>
+      <li><strong>quran.com API</strong> — Kuran metni ve ses için kullanılır. <a href="https://quran.com/privacy" target="_blank">Gizlilik Politikası</a></li>
+      <li><strong>RevenueCat</strong> — Pro abonelik işlemleri için kullanılır. Ödeme bilgileri Apple tarafından işlenir. <a href="https://www.revenuecat.com/privacy" target="_blank">Gizlilik Politikası</a></li>
     </ul>
-
     <h2>3. Hesap ve Kayıt</h2>
-    <p>Uygulama bir hesap oluşturmanızı gerektirmez. Pro abonelik durumu Apple hesabınız üzerinden doğrulanır.</p>
-
+    <p>Uygulama hesap oluşturmanızı gerektirmez. Pro abonelik durumu Apple hesabınız üzerinden doğrulanır.</p>
     <h2>4. Veri Güvenliği</h2>
     <p>Kişisel verileriniz üçüncü taraflarla satılmaz, kiralanmaz veya pazarlama amacıyla paylaşılmaz. Konum veriniz sunucularımızda saklanmaz.</p>
-
     <h2>5. Çocukların Gizliliği</h2>
     <p>Uygulama 4+ yaş derecelendirmesine sahiptir. 13 yaş altı çocuklardan bilerek kişisel veri toplamıyoruz.</p>
-
     <h2>6. Veri Saklama</h2>
-    <p>Uygulama tarafından cihazınızda saklanan veriler (namaz vakti önbelleği, yer imleri, konum profilleri) uygulamayı sildiğinizde otomatik olarak silinir.</p>
-
+    <p>Cihazınızda saklanan veriler uygulamayı sildiğinizde otomatik olarak silinir.</p>
     <h2>7. Haklarınız</h2>
-    <p>Verilerinizle ilgili sorularınız için bizimle iletişime geçebilirsiniz. iCloud verilerinizi iOS Ayarlar → Apple ID → iCloud üzerinden yönetebilirsiniz.</p>
-
+    <p>iCloud verilerinizi iOS Ayarlar → Apple ID → iCloud üzerinden yönetebilirsiniz. Sorularınız için bizimle iletişime geçin.</p>
     <h2>8. İletişim</h2>
-    <p>Gizlilik ile ilgili sorularınız için: <a href="mailto:developer.ramazanceylan@gmail.com">developer.ramazanceylan@gmail.com</a></p>
-
+    <p><a href="mailto:developer.ramazanceylan@gmail.com">developer.ramazanceylan@gmail.com</a></p>
     <h2>9. Politika Değişiklikleri</h2>
     <p>Bu politika güncellendiğinde bu sayfada yayınlanır. Uygulamayı kullanmaya devam etmeniz güncel politikayı kabul ettiğiniz anlamına gelir.</p>
+    <a href="index.html" class="back">← Ana Sayfaya Dön</a>
+  </div>
 
-    <a href="index.html" class="back">← Ana sayfaya dön</a>
-  </main>
+  <!-- ENGLISH -->
+  <div lang-content="en">
+    <h2 style="margin-top:0">Privacy Policy</h2>
+    <p>This privacy policy explains how Namaz Pro collects, uses, and protects your personal data.</p>
+    <h2>1. Data We Collect</h2>
+    <ul>
+      <li><strong>Location data</strong> — Accessed only while the app is in use, to calculate prayer times and Qibla direction. Processed on-device and never sent to our servers.</li>
+      <li><strong>Camera</strong> — Used only for the AR Qibla feature. No images are recorded or shared.</li>
+      <li><strong>iCloud</strong> — Used to sync your preferences across your Apple devices. Accessible only to you.</li>
+      <li><strong>Notifications</strong> — Local notifications are created for prayer time reminders. Permission is optional.</li>
+    </ul>
+    <h2>2. Third-Party Services</h2>
+    <ul>
+      <li><strong>Aladhan API</strong> — Coordinates are sent to calculate prayer times. <a href="https://aladhan.com/privacy-policy" target="_blank">Privacy Policy</a></li>
+      <li><strong>quran.com API</strong> — Used for Quran text and audio. <a href="https://quran.com/privacy" target="_blank">Privacy Policy</a></li>
+      <li><strong>RevenueCat</strong> — Used for Pro subscription management. Payment information is processed by Apple. <a href="https://www.revenuecat.com/privacy" target="_blank">Privacy Policy</a></li>
+    </ul>
+    <h2>3. Account & Registration</h2>
+    <p>The app does not require account creation. Pro subscription status is verified through your Apple account.</p>
+    <h2>4. Data Security</h2>
+    <p>Your personal data is never sold, rented, or shared with third parties for marketing. Location data is not stored on our servers.</p>
+    <h2>5. Children's Privacy</h2>
+    <p>The app is rated 4+. We do not knowingly collect personal data from children under 13.</p>
+    <h2>6. Data Retention</h2>
+    <p>Data stored on your device is automatically deleted when you uninstall the app.</p>
+    <h2>7. Your Rights</h2>
+    <p>You can manage your iCloud data via iOS Settings → Apple ID → iCloud. Contact us for any privacy-related questions.</p>
+    <h2>8. Contact</h2>
+    <p><a href="mailto:developer.ramazanceylan@gmail.com">developer.ramazanceylan@gmail.com</a></p>
+    <h2>9. Policy Changes</h2>
+    <p>Updates to this policy will be published on this page. Continued use of the app constitutes acceptance of the updated policy.</p>
+    <a href="index.html" class="back">← Back to Home</a>
+  </div>
+
+  <!-- ARABIC -->
+  <div lang-content="ar" dir="rtl" style="text-align:right">
+    <h2 style="margin-top:0">سياسة الخصوصية</h2>
+    <p>توضح سياسة الخصوصية هذه كيفية جمع تطبيق نماز برو لبياناتك الشخصية واستخدامها وحمايتها.</p>
+    <h2>١. البيانات التي نجمعها</h2>
+    <ul>
+      <li><strong>بيانات الموقع</strong> — يتم الوصول إليها فقط أثناء استخدام التطبيق لحساب أوقات الصلاة واتجاه القبلة. تتم المعالجة على الجهاز ولا ترسل إلى خوادمنا.</li>
+      <li><strong>الكاميرا</strong> — تُستخدم فقط لميزة القبلة بتقنية AR. لا يتم تسجيل أي صور أو مشاركتها.</li>
+      <li><strong>iCloud</strong> — يُستخدم لمزامنة تفضيلاتك عبر أجهزة Apple. هذه البيانات متاحة لك فقط.</li>
+      <li><strong>الإشعارات</strong> — يتم إنشاء إشعارات محلية لتذكيرات أوقات الصلاة. الإذن اختياري.</li>
+    </ul>
+    <h2>٢. خدمات الطرف الثالث</h2>
+    <ul>
+      <li><strong>Aladhan API</strong> — ترسل الإحداثيات لحساب أوقات الصلاة. <a href="https://aladhan.com/privacy-policy" target="_blank">سياسة الخصوصية</a></li>
+      <li><strong>quran.com API</strong> — يستخدم لنص القرآن والصوت. <a href="https://quran.com/privacy" target="_blank">سياسة الخصوصية</a></li>
+      <li><strong>RevenueCat</strong> — يستخدم لإدارة اشتراك برو. تتم معالجة معلومات الدفع بواسطة Apple. <a href="https://www.revenuecat.com/privacy" target="_blank">سياسة الخصوصية</a></li>
+    </ul>
+    <h2>٣. الحساب والتسجيل</h2>
+    <p>لا يتطلب التطبيق إنشاء حساب. يتم التحقق من حالة اشتراك برو عبر حساب Apple الخاص بك.</p>
+    <h2>٤. أمان البيانات</h2>
+    <p>لا يتم بيع بياناتك الشخصية أو مشاركتها مع أطراف ثالثة لأغراض تسويقية. لا يتم تخزين بيانات الموقع على خوادمنا.</p>
+    <h2>٥. خصوصية الأطفال</h2>
+    <p>التطبيق مصنف +4. لا نجمع بيانات شخصية من الأطفال دون 13 عاماً عن علم.</p>
+    <h2>٦. الاحتفاظ بالبيانات</h2>
+    <p>يتم حذف البيانات المخزنة على جهازك تلقائياً عند إلغاء تثبيت التطبيق.</p>
+    <h2>٧. حقوقك</h2>
+    <p>يمكنك إدارة بيانات iCloud عبر إعدادات iOS ← معرف Apple ← iCloud. تواصل معنا لأي أسئلة تتعلق بالخصوصية.</p>
+    <h2>٨. التواصل</h2>
+    <p><a href="mailto:developer.ramazanceylan@gmail.com">developer.ramazanceylan@gmail.com</a></p>
+    <h2>٩. تغييرات السياسة</h2>
+    <p>ستُنشر التحديثات على هذه الصفحة. يُعدّ استمرار استخدامك للتطبيق موافقةً على السياسة المحدّثة.</p>
+    <a href="index.html" class="back">← العودة إلى الصفحة الرئيسية</a>
+  </div>
+
+</main>
+<footer>© 2026 Namaz Pro. All rights reserved.</footer>
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('[lang-content]').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelector('[lang-content="' + lang + '"]').classList.add('active');
+    event.target.classList.add('active');
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    localStorage.setItem('np_lang', lang);
+  }
+  const saved = localStorage.getItem('np_lang');
+  if (saved && saved !== 'tr') {
+    document.querySelectorAll('.lang-btn').forEach(b => {
+      if (b.textContent.includes(saved === 'en' ? 'English' : 'العربية')) b.click();
+    });
+  }
+</script>
 </body>
 </html>

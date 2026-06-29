@@ -3,33 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kullanım Koşulları — Namaz Pro</title>
+  <title>Terms of Use — Namaz Pro</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #0f1a14; color: #e8f0eb; line-height: 1.7; }
-    header { background: #1B6B4A; padding: 40px 20px; text-align: center; }
-    header h1 { font-size: 1.8rem; color: #fff; }
+    header { background: #1B6B4A; padding: 40px 20px 32px; text-align: center; }
+    header h1 { font-size: 1.9rem; color: #fff; font-weight: 700; }
     header p { color: rgba(255,255,255,0.7); margin-top: 6px; font-size: 0.9rem; }
+    .lang-bar { background: #163d27; display: flex; justify-content: center; gap: 8px; padding: 14px 20px; border-bottom: 1px solid #1e4a30; }
+    .lang-btn { background: transparent; border: 1.5px solid #2e6645; color: #7ecba0; padding: 6px 20px; border-radius: 20px; cursor: pointer; font-size: 0.88rem; font-weight: 600; transition: all .2s; }
+    .lang-btn.active, .lang-btn:hover { background: #1B6B4A; border-color: #1B6B4A; color: #fff; }
     main { max-width: 740px; margin: 40px auto; padding: 0 20px 60px; }
-    h2 { color: #4CAF82; font-size: 1.1rem; margin: 32px 0 10px; }
+    h2 { color: #4CAF82; font-size: 1.05rem; margin: 28px 0 10px; font-weight: 600; }
     p, li { color: #c8dace; font-size: 0.97rem; }
     ul { padding-left: 20px; margin-top: 8px; }
-    li { margin-bottom: 6px; }
+    li { margin-bottom: 8px; }
     a { color: #4CAF82; }
-    .back { display: inline-block; margin-top: 40px; color: #4CAF82; text-decoration: none; font-size: 0.9rem; }
+    .back { display: block; text-align: center; margin-top: 40px; color: #4a7a5a; text-decoration: none; font-size: 0.9rem; }
+    footer { text-align: center; padding: 32px 20px; color: #4a7a5a; font-size: 0.85rem; }
+    [lang-content] { display: none; }
+    [lang-content].active { display: block; }
+    [dir="rtl"] ul { padding-left: 0; padding-right: 20px; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Kullanım Koşulları</h1>
-    <p>Son güncelleme: 20 Haziran 2026</p>
-  </header>
-  <main>
-    <p>Namaz Pro uygulamasını ("uygulama") kullanarak aşağıdaki koşulları kabul etmiş olursunuz.</p>
+<header>
+  <h1>Namaz Pro</h1>
+  <p>Son güncelleme / Last updated / آخر تحديث: 29 Haziran 2026</p>
+</header>
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('tr')">Türkçe</button>
+  <button class="lang-btn" onclick="setLang('en')">English</button>
+  <button class="lang-btn" onclick="setLang('ar')">العربية</button>
+</div>
+<main>
 
+  <!-- TURKISH -->
+  <div lang-content="tr" class="active">
+    <h2 style="margin-top:0">Kullanım Koşulları</h2>
+    <p>Namaz Pro uygulamasını kullanarak aşağıdaki koşulları kabul etmiş olursunuz.</p>
     <h2>1. Lisans</h2>
     <p>Size uygulamayı kişisel, ticari olmayan amaçlarla kullanmak için sınırlı, devredilemez bir lisans verilmektedir. Uygulamayı kopyalamak, değiştirmek veya dağıtmak yasaktır.</p>
-
     <h2>2. Pro Abonelik</h2>
     <ul>
       <li>Pro abonelik aylık veya yıllık olarak sunulmaktadır.</li>
@@ -37,20 +51,83 @@
       <li>Satın alma işlemleri Apple App Store üzerinden gerçekleştirilir; iade talepleri Apple'ın iade politikasına tabidir.</li>
       <li>Aboneliğinizi iOS Ayarlar → Apple ID → Abonelikler bölümünden yönetebilirsiniz.</li>
     </ul>
-
     <h2>3. Sorumluluk Reddi</h2>
-    <p>Uygulama namaz vakitleri ve kıble yönü için iyi niyetle hesaplama yapar; ancak bunların kesin doğruluğunu garanti etmez. Resmi dini rehberlik için yerel dini otoritelere başvurmanızı tavsiye ederiz.</p>
-
+    <p>Uygulama namaz vakitleri ve kıble yönü için iyi niyetle hesaplama yapar; ancak kesin doğruluğunu garanti etmez. Resmi dini rehberlik için yerel dini otoritelere başvurmanızı tavsiye ederiz.</p>
     <h2>4. Hizmet Değişiklikleri</h2>
     <p>Uygulamayı önceden bildirimde bulunmaksızın güncelleme, değiştirme veya sonlandırma hakkımızı saklı tutarız.</p>
-
     <h2>5. Uygulanacak Hukuk</h2>
     <p>Bu koşullar Türkiye Cumhuriyeti hukukuna tabidir.</p>
-
     <h2>6. İletişim</h2>
     <p><a href="mailto:developer.ramazanceylan@gmail.com">developer.ramazanceylan@gmail.com</a></p>
+    <a href="index.html" class="back">← Ana Sayfaya Dön</a>
+  </div>
 
-    <a href="index.html" class="back">← Ana sayfaya dön</a>
-  </main>
+  <!-- ENGLISH -->
+  <div lang-content="en">
+    <h2 style="margin-top:0">Terms of Use</h2>
+    <p>By using the Namaz Pro app, you agree to the following terms.</p>
+    <h2>1. License</h2>
+    <p>You are granted a limited, non-transferable license to use the app for personal, non-commercial purposes. Copying, modifying, or distributing the app is prohibited.</p>
+    <h2>2. Pro Subscription</h2>
+    <ul>
+      <li>Pro subscriptions are available on a monthly or annual basis.</li>
+      <li>Subscriptions automatically renew unless cancelled at least 24 hours before the end of the current period.</li>
+      <li>Purchases are made through the Apple App Store; refund requests are subject to Apple's refund policy.</li>
+      <li>Manage your subscription via iOS Settings → Apple ID → Subscriptions.</li>
+    </ul>
+    <h2>3. Disclaimer</h2>
+    <p>The app calculates prayer times and Qibla direction in good faith but does not guarantee absolute accuracy. We recommend consulting local religious authorities for official religious guidance.</p>
+    <h2>4. Service Changes</h2>
+    <p>We reserve the right to update, modify, or discontinue the app without prior notice.</p>
+    <h2>5. Governing Law</h2>
+    <p>These terms are governed by the laws of the Republic of Turkey.</p>
+    <h2>6. Contact</h2>
+    <p><a href="mailto:developer.ramazanceylan@gmail.com">developer.ramazanceylan@gmail.com</a></p>
+    <a href="index.html" class="back">← Back to Home</a>
+  </div>
+
+  <!-- ARABIC -->
+  <div lang-content="ar" dir="rtl" style="text-align:right">
+    <h2 style="margin-top:0">شروط الاستخدام</h2>
+    <p>باستخدامك تطبيق نماز برو، فإنك توافق على الشروط التالية.</p>
+    <h2>١. الترخيص</h2>
+    <p>يُمنح لك ترخيص محدود وغير قابل للنقل لاستخدام التطبيق لأغراض شخصية وغير تجارية. يُحظر نسخ التطبيق أو تعديله أو توزيعه.</p>
+    <h2>٢. اشتراك برو</h2>
+    <ul>
+      <li>تتوفر اشتراكات برو على أساس شهري أو سنوي.</li>
+      <li>تتجدد الاشتراكات تلقائياً ما لم يتم إلغاؤها قبل 24 ساعة على الأقل من نهاية الفترة الحالية.</li>
+      <li>تتم عمليات الشراء عبر Apple App Store؛ وتخضع طلبات الاسترداد لسياسة الاسترداد الخاصة بـ Apple.</li>
+      <li>يمكنك إدارة اشتراكك عبر إعدادات iOS ← معرف Apple ← الاشتراكات.</li>
+    </ul>
+    <h2>٣. إخلاء المسؤولية</h2>
+    <p>يحسب التطبيق أوقات الصلاة واتجاه القبلة بحسن نية، لكنه لا يضمن الدقة المطلقة. نوصي بالرجوع إلى السلطات الدينية المحلية للحصول على إرشادات دينية رسمية.</p>
+    <h2>٤. تغييرات الخدمة</h2>
+    <p>نحتفظ بالحق في تحديث التطبيق أو تعديله أو إيقافه دون إشعار مسبق.</p>
+    <h2>٥. القانون المطبق</h2>
+    <p>تخضع هذه الشروط لقوانين جمهورية تركيا.</p>
+    <h2>٦. التواصل</h2>
+    <p><a href="mailto:developer.ramazanceylan@gmail.com">developer.ramazanceylan@gmail.com</a></p>
+    <a href="index.html" class="back">← العودة إلى الصفحة الرئيسية</a>
+  </div>
+
+</main>
+<footer>© 2026 Namaz Pro. All rights reserved.</footer>
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('[lang-content]').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelector('[lang-content="' + lang + '"]').classList.add('active');
+    event.target.classList.add('active');
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    localStorage.setItem('np_lang', lang);
+  }
+  const saved = localStorage.getItem('np_lang');
+  if (saved && saved !== 'tr') {
+    document.querySelectorAll('.lang-btn').forEach(b => {
+      if (b.textContent.includes(saved === 'en' ? 'English' : 'العربية')) b.click();
+    });
+  }
+</script>
 </body>
 </html>
