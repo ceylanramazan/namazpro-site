@@ -1,0 +1,19 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["7BPX864597.com.namazpro.app"],
+        "components": [
+          {
+            "/": "/yarisma",
+            "comment": "Bilgi Yarışması paylaşım linki - uygulama kuruluysa yarışma lobisini açar"
+          },
+          {
+            "/": "/yarisma/*",
+            "comment": "yarisma alt yolları (ref kodu query ile gelir, path varyantları da kapsansın)"
+          }
+        ]
+      }
+    ]
+  }
+}
