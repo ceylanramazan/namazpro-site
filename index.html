@@ -1,44 +1,435 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Namaz Pro — Namaz Vakitleri & Kuran</title>
+  <title>Namaz Pro — Namaz Vakitleri, Kur'an, Kıble</title>
+  <meta name="description" content="Namaz vakitleri, Kur'an-ı Kerim, kıble pusulası, tesbih ve günlük bilgi yarışması — hepsi tek uygulamada. iPhone için ücretsiz indir.">
+  <meta property="og:title" content="Namaz Pro — Namaz Vakitleri, Kur'an, Kıble">
+  <meta property="og:description" content="Namaz vakitleri, Kur'an, kıble, tesbih ve bilgi yarışması — tek uygulamada.">
+  <meta property="og:image" content="https://namazpro.app/assets/icon.png">
+  <meta property="og:url" content="https://namazpro.app">
+  <link rel="icon" type="image/png" href="assets/icon.png">
+  <link rel="apple-touch-icon" href="assets/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    /* ═══ Uygulamanın v2 açık tema token'ları (DESIGN_SPEC.md) ═══ */
+    :root {
+      --bg: #F3EBDB;
+      --surface: #FFFDF6;
+      --text: #2E2417;
+      --sec: #8A7A5F;
+      --muted: #B0A288;
+      --gold: #A6803F;
+      --gold-soft: #C99B4E;
+      --gold-bright: #F2CD87;
+      --on-gold: #FFF9EC;
+      --line: #E4D6BA;
+      --cream-1: #F8F1E1;
+      --cream-2: #EFE4CB;
+      --sky-day: linear-gradient(175deg, #2E4A72 0%, #52688C 55%, #8A5F35 100%);
+      --night-1: #2A2140;
+      --night-2: #3A2838;
+      --night-3: #59391F;
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #0f1a14; color: #e8f0eb; }
-    header { background: #1B6B4A; padding: 60px 20px; text-align: center; }
-    header h1 { font-size: 2.4rem; font-weight: 700; color: #fff; }
-    header p { margin-top: 12px; font-size: 1.1rem; color: rgba(255,255,255,0.8); }
-    main { max-width: 700px; margin: 60px auto; padding: 0 20px; }
-    .card { background: #1a2e21; border-radius: 16px; padding: 32px; margin-bottom: 20px; }
-    .card h2 { font-size: 1.2rem; color: #4CAF82; margin-bottom: 12px; }
-    .card p { line-height: 1.7; color: #c8dace; }
-    .links { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 32px; }
-    .links a { background: #1B6B4A; color: #fff; padding: 14px 28px; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 0.95rem; }
-    .links a:hover { background: #24895f; }
-    footer { text-align: center; padding: 40px 20px; color: #4a7a5a; font-size: 0.85rem; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Arabic", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+
+    .wrap { max-width: 1060px; margin: 0 auto; padding: 0 22px; }
+
+    /* ═══ Üst çubuk ═══ */
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(252, 247, 236, .88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar-inner { display: flex; align-items: center; gap: 12px; padding: 12px 0; }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .brand img { width: 34px; height: 34px; border-radius: 9px; box-shadow: 0 2px 8px rgba(46,36,23,.18); }
+    .brand span { font-size: 16px; font-weight: 800; letter-spacing: .3px; }
+    .lang { margin-inline-start: auto; display: flex; gap: 4px; background: var(--cream-1); border: 1px solid var(--line); border-radius: 13px; padding: 3px; }
+    .lang button {
+      border: none; background: transparent; cursor: pointer; font-family: inherit;
+      font-size: 11.5px; font-weight: 800; color: var(--sec);
+      padding: 6px 12px; border-radius: 10px; transition: all .2s;
+    }
+    .lang button.active { background: var(--gold); color: var(--on-gold); }
+
+    /* ═══ Hero ═══ */
+    .hero { position: relative; overflow: hidden; }
+    .hero-sky {
+      position: absolute; inset: 0;
+      background: var(--sky-day);
+      opacity: .10;
+      mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+      -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+    }
+    .hero-inner {
+      position: relative;
+      display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center;
+      padding: 72px 0 56px;
+    }
+    .hero h1 { font-size: 44px; font-weight: 800; letter-spacing: -1px; line-height: 1.15; }
+    [dir="rtl"] .hero h1 { letter-spacing: 0; }
+    .hero h1 em { font-style: normal; color: var(--gold); }
+    .hero .sub { margin-top: 16px; font-size: 16.5px; color: var(--sec); max-width: 460px; }
+    .hero-cta { margin-top: 28px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+    .hero-cta img.badge { height: 52px; width: auto; transition: transform .2s; }
+    .hero-cta a:hover img.badge { transform: scale(1.04); }
+    .hero-note { font-size: 12px; color: var(--muted); font-weight: 600; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold); background: rgba(166,128,63,.10);
+      border: 1px solid rgba(166,128,63,.25);
+      padding: 6px 13px; border-radius: 14px; margin-bottom: 18px;
+    }
+    [dir="rtl"] .eyebrow { letter-spacing: 0; }
+
+    /* Telefon çerçevesi */
+    .phone {
+      width: 100%; max-width: 300px; margin: 0 auto;
+      border-radius: 44px; padding: 9px;
+      background: #1C1610;
+      box-shadow: 0 30px 70px rgba(46,36,23,.30), 0 4px 14px rgba(46,36,23,.18);
+    }
+    .phone img { border-radius: 36px; }
+    .hero .phone { transform: rotate(2.5deg); }
+
+    /* ═══ Bölüm başlıkları ═══ */
+    section { padding: 64px 0; }
+    .sec-head { text-align: center; max-width: 560px; margin: 0 auto 40px; }
+    .sec-head h2 { font-size: 30px; font-weight: 800; letter-spacing: -.5px; }
+    [dir="rtl"] .sec-head h2 { letter-spacing: 0; }
+    .sec-head p { margin-top: 10px; color: var(--sec); font-size: 15px; }
+
+    /* ═══ Özellik ızgarası ═══ */
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .feature {
+      background: var(--surface); border: 1px solid var(--line); border-radius: 22px;
+      padding: 24px 22px;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .feature:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(46,36,23,.10); }
+    .feature .ic {
+      width: 44px; height: 44px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--cream-1), var(--cream-2));
+      border: 1px solid var(--line);
+      font-size: 20px;
+    }
+    .feature h3 { margin-top: 14px; font-size: 15.5px; font-weight: 800; }
+    .feature p { margin-top: 6px; font-size: 13.5px; color: var(--sec); }
+
+    /* ═══ Galeri ═══ */
+    .gallery {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px;
+      align-items: start;
+    }
+    .gallery .phone { max-width: 100%; padding: 7px; border-radius: 36px; }
+    .gallery .phone img { border-radius: 30px; }
+    .gallery figure:nth-child(even) { margin-top: 28px; }
+    .gallery figcaption { text-align: center; margin-top: 12px; font-size: 12.5px; font-weight: 700; color: var(--sec); }
+
+    /* ═══ Yarışma bölümü ═══ */
+    .contest {
+      position: relative; overflow: hidden;
+      border-radius: 30px;
+      background: linear-gradient(160deg, var(--night-1) 0%, var(--night-2) 46%, var(--night-3) 100%);
+      border: 1px solid rgba(242,205,135,.35);
+      color: #F6F0E4;
+      padding: 48px 40px;
+      display: grid; grid-template-columns: 1.2fr .8fr; gap: 32px; align-items: center;
+    }
+    .contest::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(110deg, transparent 32%, rgba(242,205,135,.08) 50%, transparent 68%);
+      background-size: 200% 100%;
+      animation: shimmer 4s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes shimmer { from { background-position: 120% 0; } to { background-position: -80% 0; } }
+    .contest .star { position: absolute; border-radius: 50%; background: var(--gold-bright); animation: twinkle 3.4s ease-in-out infinite; }
+    @keyframes twinkle { 0%, 100% { opacity: 1; } 50% { opacity: .2; } }
+    .contest h2 { font-size: 27px; font-weight: 800; letter-spacing: -.5px; line-height: 1.25; }
+    [dir="rtl"] .contest h2 { letter-spacing: 0; }
+    .contest h2 span { color: var(--gold-bright); }
+    .contest p { margin-top: 12px; font-size: 14.5px; color: rgba(246,240,228,.75); max-width: 430px; }
+    .contest .cta {
+      display: inline-flex; align-items: center; gap: 9px;
+      margin-top: 24px; padding: 15px 26px; border-radius: 18px;
+      background: linear-gradient(90deg, #C99B4E, #F2CD87);
+      color: #2A1D0C; font-size: 14.5px; font-weight: 800; text-decoration: none;
+      box-shadow: 0 10px 28px rgba(231,181,99,.3);
+      transition: transform .2s;
+    }
+    .contest .cta:hover { transform: translateY(-2px); }
+    .contest .linkline { margin-top: 14px; font-size: 12px; font-weight: 700; color: rgba(246,240,228,.5); }
+    .contest-stats { display: flex; flex-direction: column; gap: 10px; }
+    .contest-stat {
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(12,9,5,.4); border: 1px solid rgba(242,205,135,.2);
+      border-radius: 16px; padding: 13px 16px; font-size: 13.5px; font-weight: 700;
+    }
+    .contest-stat b { color: var(--gold-bright); font-weight: 800; }
+
+    /* ═══ Footer ═══ */
+    footer { border-top: 1px solid var(--line); padding: 36px 0 44px; }
+    .foot { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+    .foot .brand span { font-size: 14px; }
+    .foot nav { display: flex; gap: 18px; flex-wrap: wrap; margin-inline-start: auto; }
+    .foot nav a { font-size: 13px; font-weight: 700; color: var(--sec); text-decoration: none; }
+    .foot nav a:hover { color: var(--gold); }
+    .copy { margin-top: 14px; font-size: 12px; color: var(--muted); }
+
+    /* Giriş animasyonu (uygulamadaki screenIn) */
+    .in { animation: screenIn .5s cubic-bezier(.2,.8,.3,1) both; }
+    .in-d1 { animation-delay: .08s; }
+    @keyframes screenIn { from { opacity: 0; transform: translateY(16px) scale(.985); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { .in, .contest::after, .contest .star { animation: none !important; } }
+
+    /* ═══ Mobil ═══ */
+    @media (max-width: 860px) {
+      .hero-inner { grid-template-columns: 1fr; padding: 48px 0 40px; text-align: center; }
+      .hero .sub { margin-inline: auto; }
+      .hero-cta { justify-content: center; }
+      .hero .phone { transform: none; margin-top: 8px; max-width: 250px; }
+      .features { grid-template-columns: 1fr 1fr; }
+      .gallery { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 16px; margin: 0 -22px; padding: 0 22px 8px; }
+      .gallery figure { flex: 0 0 62%; scroll-snap-align: center; margin-top: 0 !important; }
+      .contest { grid-template-columns: 1fr; padding: 36px 26px; }
+      .hero h1 { font-size: 34px; }
+    }
+    @media (max-width: 520px) { .features { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Namaz Pro</h1>
-    <p>Namaz Vakitleri, Kuran, Kıble ve daha fazlası</p>
+
+  <div class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#">
+        <img src="assets/icon.png" alt="Namaz Pro">
+        <span>Namaz Pro</span>
+      </a>
+      <div class="lang" role="group" aria-label="Dil / Language">
+        <button data-lang="tr">TR</button>
+        <button data-lang="en">EN</button>
+        <button data-lang="ar">عربي</button>
+      </div>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="hero-sky"></div>
+    <div class="wrap hero-inner">
+      <div class="in">
+        <div class="eyebrow" data-i18n="eyebrow">iPhone için ücretsiz</div>
+        <h1 data-i18n-html="title">Namazın, Kur'an'ın ve <em>daha fazlası</em> tek uygulamada</h1>
+        <p class="sub" data-i18n="subtitle">Konumuna göre hassas namaz vakitleri, sesli Kur'an-ı Kerim, kıble pusulası, tesbih ve her gün yeni bilgi yarışması.</p>
+        <div class="hero-cta">
+          <a id="storeLink" href="https://apps.apple.com/app/id6782671454">
+            <img class="badge" id="storeBadge" src="assets/badge-tr.svg" alt="App Store'dan indirin">
+          </a>
+          <span class="hero-note" data-i18n="heroNote">TR · EN · AR — Widget ve kilit ekranı desteğiyle</span>
+        </div>
+      </div>
+      <figure class="phone in in-d1">
+        <img src="assets/site-01-bugun.png" alt="Namaz Pro — Bugün ekranı" data-i18n-alt="alt1">
+      </figure>
+    </div>
   </header>
-  <main>
-    <div class="card">
-      <h2>Uygulama Hakkında</h2>
-      <p>Namaz Pro; namaz vakitleri, Kuran okuma ve dinleme, kıble, dua, tesbih ve İslami takvim özelliklerini tek bir uygulamada sunan kapsamlı bir İslami rehber uygulamasıdır.</p>
+
+  <section id="features">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 data-i18n="featTitle">İhtiyacın olan her şey</h2>
+        <p data-i18n="featSub">Sade, hızlı ve göz yormayan bir tasarımla.</p>
+      </div>
+      <div class="features">
+        <div class="feature"><div class="ic">🕌</div><h3 data-i18n="f1t">Namaz Vakitleri</h3><p data-i18n="f1p">Konumuna göre hassas vakitler, ezan bildirimleri ve vakit sayacı — çevrimdışı bile çalışır.</p></div>
+        <div class="feature"><div class="ic">📖</div><h3 data-i18n="f2t">Kur'an-ı Kerim</h3><p data-i18n="f2p">Mushaf sayfa görünümü, 20'den fazla kâri ile sesli dinleme, meal ve indirip çevrimdışı okuma.</p></div>
+        <div class="feature"><div class="ic">🧭</div><h3 data-i18n="f3t">Kıble Pusulası</h3><p data-i18n="f3p">Hassas kıble yönü ve artırılmış gerçeklik (AR) modu ile Kâbe'yi gerçek dünyada gör.</p></div>
+        <div class="feature"><div class="ic">📿</div><h3 data-i18n="f4t">Tesbih</h3><p data-i18n="f4p">Titreşimli sayaç, hedefler ve zikir setleri — cebinde her an hazır.</p></div>
+        <div class="feature"><div class="ic">🏆</div><h3 data-i18n="f5t">Bilgi Yarışması</h3><p data-i18n="f5p">Her gün 5 yeni soru; puan topla, serini koru, haftalık ve aylık sıralamada yüksel.</p></div>
+        <div class="feature"><div class="ic">🗓️</div><h3 data-i18n="f6t">Widget'lar ve Takvim</h3><p data-i18n="f6p">Ana ekran ve kilit ekranı widget'ları, hicri takvim, dini günler ve Ramazan modu.</p></div>
+      </div>
     </div>
-    <div class="card">
-      <h2>İletişim</h2>
-      <p>Sorularınız için: <a href="mailto:developer.ramazanceylan@gmail.com" style="color:#4CAF82;">developer.ramazanceylan@gmail.com</a></p>
+  </section>
+
+  <section id="gallery" style="padding-top: 0;">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 data-i18n="galTitle">Uygulamadan kareler</h2>
+      </div>
+      <div class="gallery">
+        <figure><div class="phone"><img src="assets/site-01-bugun.png" alt="Bugün" loading="lazy"></div><figcaption data-i18n="g1">Bugün</figcaption></figure>
+        <figure><div class="phone"><img src="assets/site-02-kuran.png" alt="Kur'an" loading="lazy"></div><figcaption data-i18n="g2">Kur'an</figcaption></figure>
+        <figure><div class="phone"><img src="assets/site-03-tesbih.png" alt="Tesbih" loading="lazy"></div><figcaption data-i18n="g3">Tesbih</figcaption></figure>
+        <figure><div class="phone"><img src="assets/site-04-paylas.png" alt="Sonuç paylaşımı" loading="lazy"></div><figcaption data-i18n="g4">Sonuç Paylaşımı</figcaption></figure>
+      </div>
     </div>
-    <div class="links">
-      <a href="privacy.html">Gizlilik Politikası</a>
-      <a href="terms.html">Kullanım Koşulları</a>
+  </section>
+
+  <section id="yarisma" style="padding-top: 0;">
+    <div class="wrap">
+      <div class="contest">
+        <span class="star" style="top:22px; left:36px; width:2px; height:2px;"></span>
+        <span class="star" style="top:48px; right:70px; width:3px; height:3px; animation-delay:.8s;"></span>
+        <div>
+          <h2 data-i18n-html="cTitle">Sen de yarış, <span>sıralamada yüksel</span></h2>
+          <p data-i18n="cSub">Günlük bilgi yarışmasında puan topla, sonucunu tek dokunuşla markalı kart olarak paylaş. Arkadaşını davet et, seni geçmeye çalışsın.</p>
+          <a class="cta" href="https://apps.apple.com/app/id6782671454"><span data-i18n="cBtn">Hemen İndir, Yarışmaya Başla</span></a>
+          <div class="linkline">namazpro.app/yarisma</div>
+        </div>
+        <div class="contest-stats">
+          <div class="contest-stat">☀️ <span data-i18n-html="cs1">Her gün <b>5 yeni soru</b></span></div>
+          <div class="contest-stat">🔥 <span data-i18n-html="cs2">Günlük seri ve <b>hız bonusu</b></span></div>
+          <div class="contest-stat">🥇 <span data-i18n-html="cs3">Haftalık &amp; aylık <b>liderlik tablosu</b></span></div>
+        </div>
+      </div>
     </div>
-  </main>
-  <footer>© 2026 Namaz Pro. Tüm hakları saklıdır.</footer>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <a class="brand" href="#"><img src="assets/icon.png" alt=""><span>Namaz Pro</span></a>
+        <nav>
+          <a href="privacy.html" data-i18n="fPrivacy">Gizlilik Politikası</a>
+          <a href="terms.html" data-i18n="fTerms">Kullanım Koşulları</a>
+          <a href="support.html" data-i18n="fSupport">Destek</a>
+          <a href="mailto:developer.ramazanceylan@gmail.com" data-i18n="fContact">İletişim</a>
+        </nav>
+      </div>
+      <div class="copy" data-i18n="fCopy">© 2026 Namaz Pro. Tüm hakları saklıdır. Apple ve App Store, Apple Inc. tescilli markalarıdır.</div>
+    </div>
+  </footer>
+
+  <script>
+    const I18N = {
+      tr: {
+        eyebrow: "iPhone için ücretsiz",
+        title: "Namazın, Kur'an'ın ve <em>daha fazlası</em> tek uygulamada",
+        subtitle: "Konumuna göre hassas namaz vakitleri, sesli Kur'an-ı Kerim, kıble pusulası, tesbih ve her gün yeni bilgi yarışması.",
+        heroNote: "TR · EN · AR — Widget ve kilit ekranı desteğiyle",
+        alt1: "Namaz Pro — Bugün ekranı",
+        featTitle: "İhtiyacın olan her şey",
+        featSub: "Sade, hızlı ve göz yormayan bir tasarımla.",
+        f1t: "Namaz Vakitleri", f1p: "Konumuna göre hassas vakitler, ezan bildirimleri ve vakit sayacı — çevrimdışı bile çalışır.",
+        f2t: "Kur'an-ı Kerim", f2p: "Mushaf sayfa görünümü, 20'den fazla kâri ile sesli dinleme, meal ve indirip çevrimdışı okuma.",
+        f3t: "Kıble Pusulası", f3p: "Hassas kıble yönü ve artırılmış gerçeklik (AR) modu ile Kâbe'yi gerçek dünyada gör.",
+        f4t: "Tesbih", f4p: "Titreşimli sayaç, hedefler ve zikir setleri — cebinde her an hazır.",
+        f5t: "Bilgi Yarışması", f5p: "Her gün 5 yeni soru; puan topla, serini koru, haftalık ve aylık sıralamada yüksel.",
+        f6t: "Widget'lar ve Takvim", f6p: "Ana ekran ve kilit ekranı widget'ları, hicri takvim, dini günler ve Ramazan modu.",
+        galTitle: "Uygulamadan kareler",
+        g1: "Bugün", g2: "Kur'an", g3: "Tesbih", g4: "Sonuç Paylaşımı",
+        cTitle: "Sen de yarış, <span>sıralamada yüksel</span>",
+        cSub: "Günlük bilgi yarışmasında puan topla, sonucunu tek dokunuşla markalı kart olarak paylaş. Arkadaşını davet et, seni geçmeye çalışsın.",
+        cBtn: "Hemen İndir, Yarışmaya Başla",
+        cs1: "Her gün <b>5 yeni soru</b>", cs2: "Günlük seri ve <b>hız bonusu</b>", cs3: "Haftalık &amp; aylık <b>liderlik tablosu</b>",
+        fPrivacy: "Gizlilik Politikası", fTerms: "Kullanım Koşulları", fSupport: "Destek", fContact: "İletişim",
+        fCopy: "© 2026 Namaz Pro. Tüm hakları saklıdır. Apple ve App Store, Apple Inc. tescilli markalarıdır.",
+        docTitle: "Namaz Pro — Namaz Vakitleri, Kur'an, Kıble",
+        badge: "assets/badge-tr.svg"
+      },
+      en: {
+        eyebrow: "Free for iPhone",
+        title: "Prayer times, Quran and <em>much more</em> in one app",
+        subtitle: "Accurate location-based prayer times, Quran with audio, qibla compass, tasbih counter and a fresh daily quiz.",
+        heroNote: "TR · EN · AR — with widgets and Lock Screen support",
+        alt1: "Namaz Pro — Today screen",
+        featTitle: "Everything you need",
+        featSub: "In a clean, fast and gentle design.",
+        f1t: "Prayer Times", f1p: "Precise times for your location, adhan notifications and a countdown — works even offline.",
+        f2t: "Holy Quran", f2p: "Mushaf page view, audio from 20+ reciters, translations and offline reading.",
+        f3t: "Qibla Compass", f3p: "Accurate qibla direction plus an AR mode to see the Kaaba in the real world.",
+        f4t: "Tasbih", f4p: "Haptic counter, goals and dhikr sets — always ready in your pocket.",
+        f5t: "Daily Quiz", f5p: "5 new questions every day; earn points, keep your streak and climb the weekly and monthly leaderboards.",
+        f6t: "Widgets & Calendar", f6p: "Home and Lock Screen widgets, Hijri calendar, religious days and Ramadan mode.",
+        galTitle: "A look inside",
+        g1: "Today", g2: "Quran", g3: "Tasbih", g4: "Share Result",
+        cTitle: "Join the quiz, <span>climb the ranks</span>",
+        cSub: "Earn points in the daily quiz and share your result as a branded card with one tap. Invite a friend and let them try to beat you.",
+        cBtn: "Download & Start Competing",
+        cs1: "<b>5 new questions</b> every day", cs2: "Daily streak & <b>speed bonus</b>", cs3: "Weekly &amp; monthly <b>leaderboards</b>",
+        fPrivacy: "Privacy Policy", fTerms: "Terms of Use", fSupport: "Support", fContact: "Contact",
+        fCopy: "© 2026 Namaz Pro. All rights reserved. Apple and App Store are trademarks of Apple Inc.",
+        docTitle: "Namaz Pro — Prayer Times, Quran, Qibla",
+        badge: "assets/badge-en.svg"
+      },
+      ar: {
+        eyebrow: "مجاني لآيفون",
+        title: "مواقيت الصلاة والقرآن <em>والمزيد</em> في تطبيق واحد",
+        subtitle: "مواقيت دقيقة حسب موقعك، القرآن الكريم بالصوت، بوصلة القبلة، المسبحة ومسابقة معرفية يومية.",
+        heroNote: "TR · EN · AR — مع الودجات ودعم شاشة القفل",
+        alt1: "Namaz Pro — شاشة اليوم",
+        featTitle: "كل ما تحتاجه",
+        featSub: "بتصميم بسيط وسريع ومريح للعين.",
+        f1t: "مواقيت الصلاة", f1p: "مواقيت دقيقة حسب موقعك، إشعارات الأذان وعدّاد الوقت — يعمل حتى دون اتصال.",
+        f2t: "القرآن الكريم", f2p: "عرض صفحات المصحف، الاستماع بأصوات أكثر من 20 قارئًا، التفاسير والقراءة دون اتصال.",
+        f3t: "بوصلة القبلة", f3p: "اتجاه قبلة دقيق مع وضع الواقع المعزز لرؤية الكعبة في العالم الحقيقي.",
+        f4t: "المسبحة", f4p: "عدّاد باهتزاز، أهداف ومجموعات أذكار — جاهزة دائمًا في جيبك.",
+        f5t: "المسابقة اليومية", f5p: "5 أسئلة جديدة كل يوم؛ اجمع النقاط وحافظ على سلسلتك وتقدّم في الترتيب الأسبوعي والشهري.",
+        f6t: "الودجات والتقويم", f6p: "ودجات الشاشة الرئيسية وشاشة القفل، التقويم الهجري، الأيام الدينية ووضع رمضان.",
+        galTitle: "لقطات من التطبيق",
+        g1: "اليوم", g2: "القرآن", g3: "المسبحة", g4: "مشاركة النتيجة",
+        cTitle: "شارك في المسابقة <span>وتقدّم في الترتيب</span>",
+        cSub: "اجمع النقاط في المسابقة اليومية وشارك نتيجتك ببطاقة مميزة بلمسة واحدة. ادعُ صديقك وليحاول التفوق عليك.",
+        cBtn: "حمّل الآن وابدأ المنافسة",
+        cs1: "<b>5 أسئلة جديدة</b> كل يوم", cs2: "سلسلة يومية و<b>مكافأة سرعة</b>", cs3: "<b>لوحات صدارة</b> أسبوعية وشهرية",
+        fPrivacy: "سياسة الخصوصية", fTerms: "شروط الاستخدام", fSupport: "الدعم", fContact: "تواصل معنا",
+        fCopy: "© 2026 Namaz Pro. جميع الحقوق محفوظة. Apple وApp Store علامتان تجاريتان لشركة Apple Inc.",
+        docTitle: "Namaz Pro — مواقيت الصلاة، القرآن، القبلة",
+        badge: "assets/badge-en.svg"
+      }
+    };
+
+    function applyLang(code) {
+      const t = I18N[code] || I18N.tr;
+      document.documentElement.lang = code;
+      document.documentElement.dir = code === "ar" ? "rtl" : "ltr";
+      document.title = t.docTitle;
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (t[key] !== undefined) el.textContent = t[key];
+      });
+      document.querySelectorAll("[data-i18n-html]").forEach(el => {
+        const key = el.getAttribute("data-i18n-html");
+        if (t[key] !== undefined) el.innerHTML = t[key];
+      });
+      document.querySelectorAll("[data-i18n-alt]").forEach(el => {
+        const key = el.getAttribute("data-i18n-alt");
+        if (t[key] !== undefined) el.alt = t[key];
+      });
+      document.getElementById("storeBadge").src = t.badge;
+      document.querySelectorAll(".lang button").forEach(b =>
+        b.classList.toggle("active", b.dataset.lang === code));
+      try { localStorage.setItem("np-lang", code); } catch (e) { /* gizli mod */ }
+    }
+
+    document.querySelectorAll(".lang button").forEach(b =>
+      b.addEventListener("click", () => applyLang(b.dataset.lang)));
+
+    let initial = "";
+    try { initial = localStorage.getItem("np-lang") || ""; } catch (e) { /* gizli mod */ }
+    if (!initial) {
+      const nav = (navigator.language || "tr").slice(0, 2);
+      initial = nav === "tr" ? "tr" : nav === "ar" ? "ar" : "en";
+    }
+    applyLang(initial);
+  </script>
 </body>
 </html>
