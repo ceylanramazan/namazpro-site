@@ -56,7 +56,8 @@
       -webkit-backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--line);
     }
-    .topbar-inner { display: flex; align-items: center; gap: 12px; padding: 12px 0; }
+    /* Dikkat: yalnız dikey padding — `padding: 12px 0` yazmak .wrap'in yatay 22px'ini eziyordu (mobil bulgu). */
+    .topbar-inner { display: flex; align-items: center; gap: 12px; padding-top: 12px; padding-bottom: 12px; }
     .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .brand img { width: 34px; height: 34px; border-radius: 9px; box-shadow: 0 2px 8px rgba(46,36,23,.18); }
     .brand span { font-size: 16px; font-weight: 800; letter-spacing: .3px; }
@@ -80,7 +81,7 @@
     .hero-inner {
       position: relative;
       display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center;
-      padding: 72px 0 56px;
+      padding-top: 72px; padding-bottom: 56px; /* yatay boşluk .wrap'ten gelir, ezme */
     }
     .hero h1 { font-size: 44px; font-weight: 800; letter-spacing: -1px; line-height: 1.15; }
     [dir="rtl"] .hero h1 { letter-spacing: 0; }
@@ -203,7 +204,7 @@
 
     /* ═══ Mobil ═══ */
     @media (max-width: 860px) {
-      .hero-inner { grid-template-columns: 1fr; padding: 48px 0 40px; text-align: center; }
+      .hero-inner { grid-template-columns: 1fr; padding-top: 48px; padding-bottom: 40px; text-align: center; }
       .hero .sub { margin-inline: auto; }
       .hero-cta { justify-content: center; }
       .hero .phone { transform: none; margin-top: 8px; max-width: 250px; }
